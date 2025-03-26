@@ -16,25 +16,29 @@ class LoginActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
 
-       val button_login=findViewById<Button>(R.id.button_login)
-       val email=findViewById<EditText>(R.id.email)
-       val password=findViewById<EditText>(R.id.password)
-       button_login.setOnClickListener {
-           if(!email.isValidEntry() || !password.isValidEntry()){
-               toast("Email and password is empty!")
-               return@setOnClickListener
-           }
-           val setintent = Intent(this, SettingActivity::class.java)
-           startActivity(setintent);
+        val buttonLogin = findViewById<Button>(R.id.button_login)
+        val buttonRegister = findViewById<Button>(R.id.button_register)
+        val email = findViewById<EditText>(R.id.email)
+        val password = findViewById<EditText>(R.id.password)
 
-            Log.e("This is CSIT224", "button is clicked!")
-           Toast.makeText(this, "The button is clicked!", Toast.LENGTH_LONG).show()
+        buttonLogin.setOnClickListener {
+            if (!email.isValidEntry() || !password.isValidEntry()) {
+                toast("Email and password cannot be empty.")
+                return@setOnClickListener
+            }
+
+            // Example: You can add real email format validation here if needed
+
+            val setIntent = Intent(this, ProfilePageActivity::class.java)
+            startActivity(setIntent)
+
+            Log.e("This is CSIT224", "Login button clicked!")
+            toast("Login successful!")
+        }
+
+        buttonRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-
-
-
     }
 }
