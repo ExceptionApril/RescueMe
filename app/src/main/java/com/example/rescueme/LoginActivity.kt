@@ -21,17 +21,27 @@ class LoginActivity : Activity() {
         val email = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
 
+        // Dummy user list (you can replace this with real database validation)
+
         buttonLogin.setOnClickListener {
-            if (!email.isValidEntry() || !password.isValidEntry()) {
+            val emailInput = email.text.toString().trim()
+            val passwordInput = password.text.toString()
+
+            if (emailInput.isEmpty() || passwordInput.isEmpty()) {
                 toast("Email and password cannot be empty.")
                 return@setOnClickListener
             }
 
-            // Example: You can add real email format validation here if needed
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+                toast("Please enter a valid email address.")
+                return@setOnClickListener
+            }
 
-            val setIntent = Intent(this, ProfilePageActivity::class.java)
-            startActivity(setIntent)
-
+            // All validations passed, go to ProfilePage
+            buttonLogin.setOnClickListener{
+                val setIntent = Intent(this, ProfilePageActivity::class.java)
+                startActivity(setIntent)
+            }
             Log.e("This is CSIT224", "Login button clicked!")
             toast("Login successful!")
         }
@@ -41,4 +51,5 @@ class LoginActivity : Activity() {
             startActivity(intent)
         }
     }
+
 }
