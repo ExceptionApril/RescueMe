@@ -21,8 +21,6 @@ class LoginActivity : Activity() {
         val email = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
 
-        // Dummy user list (you can replace this with real database validation)
-
         buttonLogin.setOnClickListener {
             val emailInput = email.text.toString().trim()
             val passwordInput = password.text.toString()
@@ -36,12 +34,9 @@ class LoginActivity : Activity() {
                 toast("Please enter a valid email address.")
                 return@setOnClickListener
             }
-
             // All validations passed, go to ProfilePage
-            buttonLogin.setOnClickListener{
                 val setIntent = Intent(this, ProfilePageActivity::class.java)
                 startActivity(setIntent)
-            }
             Log.e("This is CSIT224", "Login button clicked!")
             toast("Login successful!")
         }
